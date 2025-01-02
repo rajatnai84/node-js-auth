@@ -3,7 +3,10 @@ import { isTokenValid } from "@utils/jwt";
 
 export const isAuthenticated = async (req, res, next: Function) => {
     try {
-        const token = req.cookies.token;
+        const authHeader = req.headers['authorization']
+        console.log(authHeader)
+        const token = authHeader && authHeader.slice(7)
+
         if (token == null || !token) {
             return res.status(401).json({
                 success: false,

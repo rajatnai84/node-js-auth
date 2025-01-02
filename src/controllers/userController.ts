@@ -23,13 +23,7 @@ export async function login(req: Request, res: Response) {
         const isMatched = await bcrypt.compare(req.body.password, user.password)
         if (isMatched) {
             const token = generateToken(user)
-            res.status(200).cookie(
-                "token", token,
-                {
-                    expires: new Date(Date.now() + 1 * 24 * 60 * 60 * 1000),
-                    httpOnly: true
-                }
-            ).json({
+            res.status(200).json({
                 token,
                 id: user.id,
                 username: user.username,
