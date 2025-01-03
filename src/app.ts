@@ -3,7 +3,7 @@ import cookieParser from 'cookie-parser';
 import 'dotenv/config';
 import cors from 'cors';
 import { userRouter } from '@routes/userRoutes';
-import { isAuthenticated } from './middlewares/authentication';
+import { isAuthenticated } from '@middlewares/authentication';
 import { authRouter } from '@routes/authRoutes';
 
 const app = express();

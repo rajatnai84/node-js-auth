@@ -4,7 +4,6 @@ import { isTokenValid } from "@utils/jwt";
 export const isAuthenticated = async (req, res, next: Function) => {
     try {
         const authHeader = req.headers['authorization']
-        console.log(authHeader)
         const token = authHeader && authHeader.slice(7)
 
         if (token == null || !token) {
