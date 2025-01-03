@@ -66,6 +66,8 @@ npm run start
 
 > Mannual Testing with the Postman
 
+### Authentication Routes
+
 1. Register
 
 post: `localhost:8080/auth/register`
@@ -79,6 +81,42 @@ post: `localhost:8080/auth/register`
 }
 ```
 
+responses:
+
+`201: Success`
+```json
+
+{
+    "id": <number>,
+    "username": <string>,
+    "name": <string>,
+    "email": <string>
+}
+
+```
+
+`400: Bad Request`
+```json
+{
+    "errors": [
+        {
+            "type": <stirng>,
+            "value": <stirng>,
+            "msg": <stirng>,
+            "path": <stirng>,
+            "location": <stirng>
+        }
+    ]
+}
+```
+
+`500: Server Error`
+
+```json
+{"message": <string>}
+```
+
+
 2. Login
 
 post: `localhost:8080/auth/login`
@@ -90,14 +128,78 @@ post: `localhost:8080/auth/login`
 }
 ```
 
+responses:
+
+
+`200: Success`
+```json
+
+{
+    "token": <string>,
+    "id": <number>,
+    "username": <string>,
+    "name": <string>,
+    "email": <string>
+}
+
+```
+
+`400: Bad Request`
+```json
+{
+    "errors": [
+        {
+            "type": <stirng>,
+            "value": <stirng>,
+            "msg": <stirng>,
+            "path": <stirng>,
+            "location": <stirng>
+        }
+    ]
+}
+```
+
+`500: Server Error`
+
+```json
+{"message": <string>}
+```
+
+### Protected Routes
+
 3. Authotization Working
 
 > Set the token in the authorization header as Bearer token which you would get after login.
 
 get: `localhost:8080/users/getAll`
 
-output: Have all users data.
+responses
    
+`200: Success`
+
+```json
+{
+    "users": [
+        {...},
+        ...
+    ]
+}
+```
+
+`401: Unauthorized`
+
+```json
+{
+    "success": <boolean>,
+    "message": <string>
+}
+```
+
+`500: Server Error`
+
+```json
+{"message": <string>}
+```
 
 
 
