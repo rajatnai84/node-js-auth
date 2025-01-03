@@ -2,19 +2,21 @@ import { User } from "@custom-types/db";
 import { prisma } from "../configs/db";
 
 export async function createUser(user: User) {
-    const data: User = await prisma.user.create({
-        data: {
-            email: user.email,
-            name: user.name,
-            username: user.username,
-            password: user.password,
-        }
-    })
-    return data
+    if (user.email && user.name && user.password && user.username) {
+        const data: User = await prisma.user.create({
+            data: {
+                email: user.email,
+                name: user.name,
+                username: user.username,
+                password: user.password,
+            }
+        })
+        return data
+    }
 }
 
 export async function getUserFromId(id: number) {
-    const user : User | null = await prisma.user.findUnique({
+    const user: User | null = await prisma.user.findUnique({
         where: {
             id: id
         }

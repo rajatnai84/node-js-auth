@@ -1,7 +1,8 @@
 import { getUserFromId } from "@services/userService";
 import { isTokenValid } from "@utils/jwt";
+import { Request, Response } from "express";
 
-export const isAuthenticated = async (req, res, next: Function) => {
+export const isAuthenticated = async (req:Request, res:Response, next:any) : Promise<any> =>  {
     try {
         const authHeader = req.headers['authorization']
         const token = authHeader && authHeader.slice(7)
@@ -13,11 +14,14 @@ export const isAuthenticated = async (req, res, next: Function) => {
             })
         }
         else {
-            const id = await isTokenValid(token)
-            req.user = await getUserFromId(id);
+            await isTokenValid(token)
+            const id: number | null = await isTokenValid(token)
+            if (id) {
+                await getUserFromId(id);
+            }
         }
         next()
-    } catch (error) {
+    } catch (error: any) {
         res.status(500).json({
             message: error.message,
         })

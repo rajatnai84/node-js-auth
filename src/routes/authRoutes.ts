@@ -6,13 +6,13 @@ import { body } from 'express-validator'
 export const authRouter = express.Router()
 
 const validEmailChain = () => body('email').notEmpty().trim().isEmail().withMessage("Not a valid Email");
-const emailInUse = async (value) => {
+const emailInUse = async (value:string) => {
     const user = await getUser(value);
     if (user) {
         throw new Error('Email is already in use.')
     }
 }
-const userNameInUse = async (value) => {
+const userNameInUse = async (value:string) => {
     const user = await getUser(value);
     if (user) {
         throw new Error('Username is already in use.')

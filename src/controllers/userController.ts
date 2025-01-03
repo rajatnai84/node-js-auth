@@ -3,6 +3,7 @@ import { Request, Response } from "express";
 import bcrypt from "bcrypt";
 import { generateToken } from "@utils/jwt";
 import { validationResult } from "express-validator";
+import { User } from "@custom-types/db";
 
 export async function register(req: Request, res: Response) {
     const errorResult = validationResult(req);
@@ -15,7 +16,7 @@ export async function register(req: Request, res: Response) {
             }
             const result = await createUser(userData)
             res.status(200).json({ result: result })
-        } catch (error) {
+        } catch (error: any) {
             res.status(500).json({ message: error.message })
         }
     } else {
@@ -27,18 +28,20 @@ export async function login(req: Request, res: Response) {
     const errorResult = validationResult(req);
     if (errorResult.isEmpty()) {
         try {
-            const user = await getUser(req.body.username)
-            const isMatched = await bcrypt.compare(req.body.password, user.password)
-            if (isMatched) {
-                const token = generateToken(user)
-                res.status(200).json({
-                    token,
-                    id: user.id,
-                    username: user.username,
-                    email: user.email
-                })
+            const user: User | null = await getUser(req.body.username)
+            if (user && user.password) {
+                const isMatched = await bcrypt.compare(req.body.password, user.password)
+                if (isMatched) {
+                    const token = generateToken(user)
+                    res.status(200).json({
+                        token,
+                        id: user.id,
+                        username: user.username,
+                        email: user.email
+                    })
+                }
             }
-        } catch (error) {
+        } catch (error:any) {
             console.log(error)
             res.status(500).json({ message: error.message })
         }
