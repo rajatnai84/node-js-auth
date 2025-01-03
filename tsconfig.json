@@ -7,7 +7,7 @@
         "sourceMap": true,
         "strict": true,
         "outDir": "dist",
-        "baseUrl": ".",
+        "baseUrl": "./",
         "paths": {
             "@controllers/*": ["src/controllers/*"],
             "@services/*": ["src/services/*"],

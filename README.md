@@ -32,7 +32,7 @@ npm i
 4. Run project
 
 ```bash
-npm run dev
+npm run start
 ```
 
 #### If Postgres connection not work
@@ -59,7 +59,7 @@ npx prisma migrate dev --name init
 4. Run project
 
 ```bash
-npm run dev
+npm run start
 ```
 
 ## Testing
