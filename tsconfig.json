@@ -16,6 +16,7 @@
             "@routes/*": ["src/routes/*"],
             "@custom-types/*": ["src/types/*"],
             "@middlewares/*": ["src/middlewares/*"],
+            "src/*": ["src/*"]
         }
 },
 "lib": ["es2015"]

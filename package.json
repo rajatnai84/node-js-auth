@@ -6,7 +6,7 @@
     "author": "",
     "main": "src/server.ts",
     "scripts": {
-        "test": "NODE_ENV=test jest",
+        "test": "jest",
         "lint": "eslint 'src/**/*.{ts,js}'",
         "dev": "ts-node -r tsconfig-paths/register src/server.ts",
         "build": "tsc && tsc-alias",
@@ -16,8 +16,27 @@
     "jest": {
         "preset": "ts-jest",
         "testEnvironment": "node",
-        "setupFiles": ["./src/tests/setup/jest.setup.ts"],
-        "coveragePathIgnorePatterns": ["/node_modules/", "/dist/"]
+        "setupFilesAfterEnv": [
+            "./src/tests/setup/jest.setup.ts"
+        ],
+        "coveragePathIgnorePatterns": [
+            "/node_modules/",
+            "/dist/"
+        ],
+        "moduleDirectories": [
+            "node_modules",
+            "src"
+        ],
+        "moduleNameMapper": {
+            "^src/(.*)$": "<rootDir>/src/$1",
+            "^@routes/(.*)$": "<rootDir>/src/routes/$1",
+            "^@controllers/(.*)$": "<rootDir>/src/controllers/$1",
+            "^@services/(.*)$": "<rootDir>/src/services/$1",
+            "^@utils/(.*)$": "<rootDir>/src/utils/$1",
+            "^@configs/(.*)$": "<rootDir>/src/configs/$1",
+            "^@custom-types/(.*)$": "<rootDir>/src/custom-types/$1",
+            "^@middlewares/(.*)$": "<rootDir>/src/middlewares/$1"
+        }
     },
     "dependencies": {
         "@prisma/client": "^6.1.0",
