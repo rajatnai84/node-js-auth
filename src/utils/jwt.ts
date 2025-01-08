@@ -1,5 +1,4 @@
 import { User } from '@custom-types/db';
-import { getUserFromId } from '@services/userService';
 import jwt from 'jsonwebtoken';
 
 export function generateToken(user: User) {

@@ -1,4 +1,4 @@
-import { register, login } from '@controllers/userController'
+import { register, login } from '@controllers/authController'
 import { getUser } from '@services/userService';
 import express from 'express'
 import { body } from 'express-validator'
